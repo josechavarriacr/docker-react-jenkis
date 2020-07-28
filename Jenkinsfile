@@ -11,19 +11,15 @@ node {
         sh 'git --version'
         echo "Branch: ${env.BRANCH_NAME}"
         sh 'docker -v'
-        // sh '/usr/local/bin/docker-compose -v'
+        sh 'docker-compose -v'
         sh 'printenv'
       }
       stage('Build Docker image') {
-         sh 'docker build -t react-test . -f web/Dockerfile --no-cache'
+        sh 'docker-compose build'
       }
-      // stage('Build Docker image') {
-      //   sh 'docker-compose build'
-        // sh "/usr/bin/docker-compose build"
-      // }
-      // stage('Deployment...') {
-      //   sh 'docker-compose up -d'
-      // }
+      stage('Deployment...') {
+        sh 'docker-compose up -d'
+      }
     }
    catch (err) {
     throw err
