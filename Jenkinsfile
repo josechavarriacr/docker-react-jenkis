@@ -9,14 +9,22 @@ node {
       sh 'docker -v'
       sh 'printenv'
     }
-    stage('Build Docker test'){
-     sh 'docker build -t react-test -f web/Dockerfile.test --no-cache .'
-    }
-    stage('Docker test'){
-      sh 'docker run --rm react-test'
-    }
-    stage('Clean Docker test'){
-      sh 'docker rmi react-test'
+    // stage('Build Docker test'){
+    //  sh 'docker build -t react-test -f web/Dockerfile.test --no-cache .'
+    // }
+    // stage('Docker test'){
+    //   sh 'docker run --rm react-test'
+    // }
+    // stage('Clean Docker test'){
+    //   sh 'docker rmi react-test'
+    // }
+
+    stage("Build and start test image") {
+        steps {
+            sh "docker-composer build"
+            sh "docker-compose up -d"
+            waitUntilServicesReady
+        }
     }
     // stage('Deploy'){
     //   if(env.BRANCH_NAME == 'master'){
@@ -31,3 +39,6 @@ node {
     throw err
   }
 }
+
+
+
