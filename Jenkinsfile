@@ -19,12 +19,11 @@ node {
     //   sh 'docker rmi react-test'
     // }
 
-    stage("Build and start test image") {
-        steps {
-            sh "docker-composer build"
-            sh "docker-compose up -d"
-            waitUntilServicesReady
-        }
+    stage('Build Docker image') {
+      sh 'docker-composer build'
+    }
+    stage('Deployment...') {
+      sh 'docker-compose up -d'
     }
     // stage('Deploy'){
     //   if(env.BRANCH_NAME == 'master'){
