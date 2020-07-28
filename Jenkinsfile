@@ -1,9 +1,9 @@
-
- pipeline {
-   try {
-     environment {
+pipeline {
+  environment {
        PATH = "$PATH:/usr/local/bin"
-      }
+  }
+
+   try {   
      stage('Checkout') {
       checkout scm
       }
