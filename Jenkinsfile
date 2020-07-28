@@ -1,6 +1,10 @@
-node {
-  try {
-    stage('Checkout') {
+pipeline {
+  environment {
+    PATH = "$PATH:/usr/local/bin"
+  }
+ node {
+   try {
+     stage('Checkout') {
       checkout scm
     }
     stage('Environment') {
@@ -9,35 +13,15 @@ node {
       sh 'docker -v'
       sh 'printenv'
     }
-    // stage('Build Docker test'){
-    //  sh 'docker build -t react-test -f web/Dockerfile.test --no-cache .'
-    // }
-    // stage('Docker test'){
-    //   sh 'docker run --rm react-test'
-    // }
-    // stage('Clean Docker test'){
-    //   sh 'docker rmi react-test'
-    // }
-
     stage('Build Docker image') {
       sh 'docker-compose build'
     }
     stage('Deployment...') {
       sh 'docker-compose up -d'
     }
-    // stage('Deploy'){
-    //   if(env.BRANCH_NAME == 'master'){
-    //     sh 'docker build -t react-test -f web/Dockerfile --no-cache .'
-    //     sh 'docker tag react-app localhost:5000/react-app'
-    //     sh 'docker push localhost:5000/react-app'
-    //     sh 'docker rmi -f react-app localhost:5000/react-app'
-    //   }
-    // }
-  }
-  catch (err) {
+   }
+   catch (err) {
     throw err
   }
+ }
 }
-
-
-
