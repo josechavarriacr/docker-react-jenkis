@@ -1,5 +1,5 @@
 
- node {
+ pipeline {
    try {
      environment {
        PATH = "$PATH:/usr/local/bin"
