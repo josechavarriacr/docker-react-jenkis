@@ -1,4 +1,4 @@
-pipeline {
+node {
   environment {
        PATH = "$PATH:/usr/local/bin"
   }
