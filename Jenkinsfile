@@ -20,7 +20,7 @@ node {
     // }
 
     stage('Build Docker image') {
-      sh 'docker-composer build'
+      sh 'docker-compose build'
     }
     stage('Deployment...') {
       sh 'docker-compose up -d'
