@@ -15,7 +15,7 @@ node {
         sh 'printenv'
       }
       stage('Build Docker image') {
-         sh 'docker build -t react-test -f web/Dockerfile --no-cache .'
+         sh 'docker build -t react-test . -f web/Dockerfile --no-cache'
       }
       // stage('Build Docker image') {
       //   sh 'docker-compose build'
